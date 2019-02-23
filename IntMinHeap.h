@@ -17,18 +17,18 @@ class IntMinHeap{
   bool isEmpty(){return size==0;}
   bool isFull(){return size==capacity;}  
  private:
-  int indexOfMin(int parent, int left, int right); // with bounds check!
-  //pre-cond: the index of the parent, and its left and right child
-  //postcond: returns the index of the greatest element
-  
-  int left(int);
-  //pre-cond: an index of the heap < size
-  //postcond: returns the left child of the heap index
-  int right(int);
-  int parent(int);
-  void buildHeap();  // convert array to a heap
+  int indexOfMin(int p, int l, int r); // with bounds check!
+  //pre-cond: p < size
+  //postcond: returns the index of the least element at index in argument  
+  int left(int p){return 2*p + 1;}
+  int right(int p){return 2*p + 2;}
+  int parent(int c){return c/2;}
+  //  void buildHeap();  // convert array to a heap
   void heapify(int i);  // heapify at position i  
+  void swap(int,int);
+  //pre-cond: two valid 
   int *A;  // array of integers - data
   int capacity; // size of array A
   int size; // data size in array
+  
 };

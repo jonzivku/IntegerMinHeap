@@ -13,8 +13,15 @@ IntMinHeap::~IntMinHeap(){
   delete [] A;
 }
 
+//in progress, i'm tired
 int *IntMinHeap::heapsort(){
-  
+  int *ASort = new int[size];
+  for(int i = size - 1; i > 0 ; i--){
+    
+    swap(i,0);
+    size--;
+    heapify(0);
+  }
   //sorts the heap into a new array which it returns. original heap is not altered
   
 }
@@ -23,15 +30,18 @@ string IntMinHeap::toString(){
   //placeholder
 }
 
+// uses decreaseKey()
 bool IntMinHeap::heapInsert(int x){
  // returns false if heap is full
   if(isFull())
     return false;
   // returns true on successful insert
-  else
-
-    //run heapInsert
+  else{
+    size++;
+    A[size-1] = x+1; //must be greater than x for decreaseKey()
+    decreaseKey(size-1, x);
     return true;
+  }
 }
 
 int IntMinHeap::minimum(){
@@ -43,54 +53,53 @@ int IntMinHeap::minimum(){
 
 int IntMinHeap::extractMin(){
   // returns 0 on empty heap
-  
+  if(isEmpty())
+    return 0;
   // removes and returns the root A[0] of the heap
   int min = A[0];
-
+  A[0] = A[size-1];
+  size--;
+  heapify(0);
   return min;
 }
 
 void IntMinHeap::decreaseKey(int i, int k){
-  // decreases a key 
+  // decreases the value of  a key
+  if(A[i] > k){
+    A[i] = k;
+    while (i > 0 && A[parent(i)] < A[i]){
+      swap(i, parent(i));
+      i = parent(i);
+    }//while
+  }//if
 }
 
-
+//finished
 int IntMinHeap::indexOfMin(int p, int l, int r){
-
-  // must check bounds
-  int temp;
-  
-  
-}
-
-//finished
-int IntMinHeap::left(int p){
-  int c = 2*p + 1;
-  if (c >= size) // must return -1 if no left child
-    return -1;
-  else
-    return c;
-}
-
-//finished
-int IntMinHeap::right(int p){
-  int c = 2*p + 2;
-  if (c >= size) //must return -1 if no right child
-    return -1;
-  else
-    return c;
-}
-
-int IntMinHeap::parent(int c){
-  //every child has a parent
-  return c/2;
+  int iOfMin = p;
+  if(l < size && A[l] < A[iOfMin])
+    iOfMin = l;
+  if(r < size && A[r] < A[iOfMin])
+    iOfMin = r;  
+  return iOfMin;
 }
 
 // calls heapify()
-void IntMinHeap::buildHeap(){
-  
-}
+//void IntMinHeap::buildHeap(){}
 
 void IntMinHeap::heapify(int p){
-  // placeholder
+  if (p < size){
+    int n = indexOfMin(p, left(p), right(p));
+    if(n != p){
+      swap(n,p);
+      heapify(n);
+    }//if p <
+  }//if n !=
+}
+void IntMinHeap::swap(int a, int b){
+  if(a < size && b < size){
+    int temp = A[a];
+    A[a] = A[b];
+    A[b] = temp;
+  }  
 }
