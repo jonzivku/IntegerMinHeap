@@ -1,5 +1,7 @@
 // Jon Zivku, jzivku, jonzivku@me.com, intMinHeap.h 
 // Assignment 2: Integer Minimum Heap and Priority Queue
+#include <string>
+using std::string;
 
 class IntMinHeap{
  public:
@@ -15,8 +17,13 @@ class IntMinHeap{
   bool isEmpty(){return size==0;}
   bool isFull(){return size==capacity;}  
  private:
-  int minOf3(int, int, int); // with bounds check!
+  int indexOfMin(int parent, int left, int right); // with bounds check!
+  //pre-cond: the index of the parent, and its left and right child
+  //postcond: returns the index of the greatest element
+  
   int left(int);
+  //pre-cond: an index of the heap < size
+  //postcond: returns the left child of the heap index
   int right(int);
   int parent(int);
   void buildHeap();  // convert array to a heap

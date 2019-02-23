@@ -14,7 +14,9 @@ IntMinHeap::~IntMinHeap(){
 }
 
 int *IntMinHeap::heapsort(){
-  //placeholder
+  
+  //sorts the heap into a new array which it returns. original heap is not altered
+  
 }
 
 string IntMinHeap::toString(){
@@ -27,20 +29,25 @@ bool IntMinHeap::heapInsert(int x){
     return false;
   // returns true on successful insert
   else
+
     //run heapInsert
     return true;
 }
 
 int IntMinHeap::minimum(){
-  // returns the root A[0] of the heap
+  if(size == 0)  //returns 0 on empty heap
+    return 0;
+  else  // returns the root A[0] of the heap
+    return A[0];
 }
 
 int IntMinHeap::extractMin(){
-  // what happens with an empty heap? public function
-
+  // returns 0 on empty heap
+  
   // removes and returns the root A[0] of the heap
-  min = A[0];
+  int min = A[0];
 
+  return min;
 }
 
 void IntMinHeap::decreaseKey(int i, int k){
@@ -48,27 +55,40 @@ void IntMinHeap::decreaseKey(int i, int k){
 }
 
 
-int IntMinHeap::minOf3(int a, int b, int c){
-  // must check bounds!
+int IntMinHeap::indexOfMin(int p, int l, int r){
+
+  // must check bounds
+  int temp;
+  
+  
 }
 
+//finished
 int IntMinHeap::left(int p){
-  // does this need to check bounds? every child has a parent
-  // but not every parent has a child
-
-  return (2*p + 1);
+  int c = 2*p + 1;
+  if (c >= size) // must return -1 if no left child
+    return -1;
+  else
+    return c;
 }
 
+//finished
 int IntMinHeap::right(int p){
-  return (2*p + 2);
+  int c = 2*p + 2;
+  if (c >= size) //must return -1 if no right child
+    return -1;
+  else
+    return c;
 }
 
 int IntMinHeap::parent(int c){
-  return 
+  //every child has a parent
+  return c/2;
 }
 
+// calls heapify()
 void IntMinHeap::buildHeap(){
-  // placeholder
+  
 }
 
 void IntMinHeap::heapify(int p){
