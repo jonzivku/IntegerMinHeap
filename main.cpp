@@ -9,7 +9,10 @@
   an issue where i had a heap with heap property maintained, but that had a
   different output than the provided spec. Turns out that I had parent(i)=i/2,
   instead of (i-1)/2. 
-  
+  After the lecture on 2/27, I just had to implement the pair, mostly cause
+  I had never used one. Also I overloaded the constructor for IntMinHeap
+  per our email. This let me make an alternate main for more thorough testing 
+  of heapsort (2400000 random numbers in, 2400000 sorted numbers out)
 */
 #include <iostream>
 #include <sstream>
@@ -41,17 +44,17 @@ int main(){
     }
     
     if(temp == -2){
-      int *sortDaHeap = daHeap.heapsort();
+      std::pair<int*, int> sortDaHeap = daHeap.heapsort();
       //stringstream ss;
       cout << "sorted array: [";
-      for(int i = 0; i < daHeap.maxInd(); i++){
-	cout << sortDaHeap[i];
-	if(i < daHeap.maxInd() - 1)
+      for(int i = 0; i < sortDaHeap.second; i++){
+	cout << sortDaHeap.first[i];
+	if(i < sortDaHeap.second - 1)
 	  cout << ", ";
 	
       }
       cout << "]" << endl;
-      delete sortDaHeap;
+      delete [] sortDaHeap.first;
     }
   }
   return 0;

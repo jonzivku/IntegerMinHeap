@@ -5,10 +5,14 @@ using std::string;
 
 class IntMinHeap{
  public:
-  IntMinHeap(int a);  // a > 0,empty heap wth this capacity
+  IntMinHeap(int c);  // c > 0,empty heap wth this capacity
+  IntMinHeap(int *A, int c, int s);
+  // c > 0, s > 0. B is an integer array
   ~IntMinHeap();  // clean up allocated memory  
-  int *heapsort();
-  //postcond: creates a new sorted array based on A. A is preserved 
+  std::pair<int*, int> heapsort();
+  //postcond: returns a pair, where the first term is a pointer to sorted array
+  // and the second term is the size of the array
+
   string toString();
   //pre-cond: none
   //postcond: returns a string of format "heap size 'size' : A[0], A[1], ...
@@ -28,7 +32,6 @@ class IntMinHeap{
   // so that heap property is maintained.
   bool isEmpty(){return size==0;}
   bool isFull(){return size==capacity;}
-  int maxInd(){return size;}
  private:
   int indexOfMin(int p, int l, int r);
   //pre-cond: three array indecies. 0 <= p < size
@@ -36,7 +39,7 @@ class IntMinHeap{
   int left(int p){return 2*p + 1;}
   int right(int p){return 2*p + 2;}
   int parent(int c){return (c-1)/2;}
-  // unused here  void buildHeap();  // convert array to a heap
+  void buildHeap();  // convert array to a heap
   void heapify(int i);// heapify at position i
   //pre-cond: 0 <= i < size
   //postcond: the heap is maintained

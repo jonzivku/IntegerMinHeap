@@ -3,6 +3,7 @@
 
 #include <sstream>
 #include <iostream>
+#include <iomanip>
 #include "IntMinHeap.h"
 
 using std::stringstream;
@@ -15,12 +16,28 @@ IntMinHeap::IntMinHeap(int c){
   A = new int[capacity];
 }
 
-IntMinHeap::~IntMinHeap(){
-  delete [] A;
+//overloaded constructor for sort, print, quit
+IntMinHeap::IntMinHeap(int *B, int c, int s){
+  capacity = c;
+  size = s;
+  A = new int[capacity];
+  for(int i = 0; i < size; i++){
+    A[i] = B[i];
+  }
+  buildHeap();
+  std::pair<int*,int> ASort = heapsort();
+  //int *ASort = heapsort();
+  for(int i = 0; i < size; i++)
+    cout << std::setfill('0') << std::setw(9) << ASort.first[i] << endl;
+
+  delete [] ASort.first;
 }
 
-//in progress, i'm tired
-int *IntMinHeap::heapsort(){
+IntMinHeap::~IntMinHeap(){
+  delete [] A; A = NULL;
+}
+
+std::pair<int*, int> IntMinHeap::heapsort(){
   //this creates a new array ASort that is a copy of A
   //ASort is what will be returned.
   int *ASort = new int[size];
@@ -42,7 +59,7 @@ int *IntMinHeap::heapsort(){
   ASort = A;
   A = temp; temp = 0;
 
-  return ASort;
+  return std::make_pair(ASort, size);
 }
 
 //uses <sstream>
@@ -117,7 +134,10 @@ int IntMinHeap::indexOfMin(int p, int l, int r){
 }
 
 // calls heapify()
-//void IntMinHeap::buildHeap(){}
+void IntMinHeap::buildHeap(){
+  for(int i = (size/2) - 1; i >= 0; i--)
+    heapify(i);
+}
 
 void IntMinHeap::heapify(int p){
   if (p < size && p >=0){
