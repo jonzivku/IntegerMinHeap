@@ -1,7 +1,13 @@
 // Jon Zivku, jzivku, jonzivku@me.com, IntMinHeap.cpp
 // Assignment 2: Integer Minimum Heap and Priority Queue
 
+#include <sstream>
+#include <iostream>
 #include "IntMinHeap.h"
+
+using std::stringstream;
+using std::endl;
+using std::cout;
 
 IntMinHeap::IntMinHeap(int c){
   capacity = c;
@@ -15,19 +21,43 @@ IntMinHeap::~IntMinHeap(){
 
 //in progress, i'm tired
 int *IntMinHeap::heapsort(){
+  //this creates a new array ASort that is a copy of A
+  //ASort is what will be returned.
   int *ASort = new int[size];
+  //deep copy ASort = A
+  for(int i = size - 1; i >= 0; i--){
+    ASort[i] = A[i];
+  }
+  //now we are going to sort A
+  int tempSize = size; //store size before running the sort
   for(int i = size - 1; i > 0 ; i--){
-    
     swap(i,0);
     size--;
     heapify(0);
-  }
-  //sorts the heap into a new array which it returns. original heap is not altered
+  }//A is now sorted, and ASort is unsorted
   
+  size = tempSize; //return size to its original value
+  //now time to swap pointers of A and ASort
+  int *temp = ASort;
+  ASort = A;
+  A = temp; temp = 0;
+
+  return ASort;
 }
 
+//uses <sstream>
 string IntMinHeap::toString(){
-  //placeholder
+  // example spec: heap size 10: 1, 2, 4, 5, 3, 8, 6, 10, 9, 7
+  stringstream ss;
+  string str;
+  ss << "heap size " << size << ":";
+  for(int i = 0; i < size; i++){
+    ss << " " << A[i] << ",";
+  }
+  str = ss.str();
+  if(size > 0)
+    str.pop_back();
+  return str;
 }
 
 // uses decreaseKey()
@@ -64,10 +94,12 @@ int IntMinHeap::extractMin(){
 }
 
 void IntMinHeap::decreaseKey(int i, int k){
+  if( i >= size || i < 0)
+    return;
   // decreases the value of  a key
   if(A[i] > k){
     A[i] = k;
-    while (i > 0 && A[parent(i)] < A[i]){
+    while (i > 0 && A[parent(i)] > A[i]){
       swap(i, parent(i));
       i = parent(i);
     }//while
@@ -88,7 +120,7 @@ int IntMinHeap::indexOfMin(int p, int l, int r){
 //void IntMinHeap::buildHeap(){}
 
 void IntMinHeap::heapify(int p){
-  if (p < size){
+  if (p < size && p >=0){
     int n = indexOfMin(p, left(p), right(p));
     if(n != p){
       swap(n,p);
@@ -97,7 +129,7 @@ void IntMinHeap::heapify(int p){
   }//if n !=
 }
 void IntMinHeap::swap(int a, int b){
-  if(a < size && b < size){
+  if(a < size && b < size){//does a private function need this check?
     int temp = A[a];
     A[a] = A[b];
     A[b] = temp;
