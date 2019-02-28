@@ -1,5 +1,5 @@
-// Jon Zivku, jzivku, jonzivku@me.com, IntMinHeap.cpp
-// Assignment 2: Integer Minimum Heap and Priority Queue
+// Jon Zivku, jzivku, jonzivku@me.com, IntMinHeap.cpp, A02
+// Integer Minimum Heap and Priority Queue
 
 #include <sstream>
 #include <iostream>
@@ -129,7 +129,7 @@ void IntMinHeap::heapify(int p){
   }//if n !=
 }
 void IntMinHeap::swap(int a, int b){
-  if(a < size && b < size){//does a private function need this check?
+  if(a < size && b < size){
     int temp = A[a];
     A[a] = A[b];
     A[b] = temp;

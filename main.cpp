@@ -3,11 +3,14 @@
 
 /*
   This program demonstrates heapsort and storage of integers in a heap. 
-  Status: working , "up to spec"
+  Status: working/tested
 
-  notes: had a tricky time wrapping my brain around decreaseKey(), which led to an issue where i had a heap with heap property maintained, but that had a different output than the provided spec. Turns out that I had parent(i)=i/2, instead of (i-1)/2. 
+  notes: had a tricky time wrapping my brain around decreaseKey(), which led to
+  an issue where i had a heap with heap property maintained, but that had a
+  different output than the provided spec. Turns out that I had parent(i)=i/2,
+  instead of (i-1)/2. 
   
- */
+*/
 #include <iostream>
 #include <sstream>
 #include "IntMinHeap.h"

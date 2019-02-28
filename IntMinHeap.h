@@ -1,5 +1,5 @@
-// Jon Zivku, jzivku, jonzivku@me.com, intMinHeap.h 
-// Assignment 2: Integer Minimum Heap and Priority Queue
+// Jon Zivku, jzivku, jonzivku@me.com, intMinHeap.h, A02 
+// Integer Minimum Heap and Priority Queue
 #include <string>
 using std::string;
 
@@ -21,10 +21,11 @@ class IntMinHeap{
   //postcond: returns A[0]; returns 0 on empty heap.
   int extractMin(); // return and remove A[root]
   //pre-cond: !isEmpty()
-  //postcond: returns A[0], element A[0] is removed, size--, heap property maintained
+  //postcond: returns A[0], element A[0] is removed, size--, heap maintained
   void decreaseKey(int i, int k);  // A[i] decreased to k
   //pre-cond: i < size, and an integer k
-  //postcond: the value of A[i], is lowered to k, and the value is moved so that heap property is maintained.
+  //postcond: the value of A[i], is lowered to k, and the value is moved
+  // so that heap property is maintained.
   bool isEmpty(){return size==0;}
   bool isFull(){return size==capacity;}
   int maxInd(){return size;}
