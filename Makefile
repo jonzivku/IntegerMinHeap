@@ -9,7 +9,7 @@ main.o: main.cpp IntMinHeap.h
 	g++ -c main.cpp -Wall
 
 IntMinHeap.o: IntMinHeap.cpp IntMinHeap.h
-	g++ -c IntMinHeap.cpp -Wall
+	g++ -c -std=c++11 IntMinHeap.cpp -Wall
 
 # clean up
 clean:
